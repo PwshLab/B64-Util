@@ -105,7 +105,7 @@ function Package-CompressedB64 {
 
     if ($ReEncode)
     {
-        $Decompressor = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($Decompressor))
+        $Decompressor = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($Decompressor))
     }
 
     Write-Output $Decompressor
