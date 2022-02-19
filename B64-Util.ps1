@@ -82,10 +82,10 @@ function Package-CompressedB64 {
 		[ValidateNotNullOrEmpty()]
 		[string]
 		$B64String,
-        [Parameter(Mandatory = $false, Position = 1, ParameterSetName = "A")]
+        [Parameter(Mandatory = $false, Position = 1)]
 		[switch]
 		$ReEncode = $false,
-        [Parameter(Mandatory = $false, Position = 1, ParameterSetName = "B")]
+        [Parameter(Mandatory = $false, Position = 1)]
 		[switch]
 		$ShrinkEncode = $false,
         [Parameter(Mandatory = $false, Position = 2)]
