@@ -115,7 +115,7 @@ function Package-CompressedB64 {
     {
         $Decompressor = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes($Decompressor))
         $Decompressor = [Text.Encoding]::Unicode.GetString([Text.Encoding]::ASCII.GetBytes($Decompressor))
-        $Decompressor = '$a=[Text.Encoding];IEX($a::ASCII.GetBytes([Convert]::FromBase64String($a::ASCII.GetString($a::Unicode.GetBytes("' + $Decompressor + '")))))'
+        $Decompressor = '$a=[Text.Encoding];IEX($a::ASCII.GetString([Convert]::FromBase64String($a::ASCII.GetString($a::Unicode.GetBytes("' + $Decompressor + '")))))'
     }
 
     Write-Output $Decompressor
